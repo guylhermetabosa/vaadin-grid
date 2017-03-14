@@ -246,7 +246,9 @@ The `class` attribute is used to differentiate header and footer templates from 
 
       // body cell templatizer needs to be attached so that `item-changed` and
       // `template-instance-changed` events propagate to grid.
-      Polymer.dom(this.root).appendChild(template.templatizer);
+      if (template && template.templatizer) {
+        Polymer.dom(this.root).appendChild(template.templatizer);
+      }
 
       // templatizer.template = template;
 

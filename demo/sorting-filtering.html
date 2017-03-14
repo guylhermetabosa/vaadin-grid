@@ -48,7 +48,7 @@
             <x-array-data-provider items="{{items}}"></x-array-data-provider>
           
             <paper-checkbox checked="{{multiSort}}">Enable Multi-Sorting</paper-checkbox>
-          
+
             <vaadin-grid aria-label="Sorting Example" items="[[items]]" multi-sort="[[multiSort]]">
           
               <vaadin-grid-column width="50px" flex-grow="0">
@@ -184,7 +184,7 @@
               <vaadin-grid-column>
                 <template class="header">
                   <vaadin-grid-filter aria-label="First Name" path="name.first" value="[[_filterFirstName]]">
-                    <input placeholder="First Name" value="{{_filterFirstName::input}}" focus-target>
+                    <!--<input placeholder="First Name" value="{{_filterFirstName::input}}" focus-target>-->
                   </vaadin-grid-filter>
                 </template>
                 <template>[[item.name.first]]</template>
