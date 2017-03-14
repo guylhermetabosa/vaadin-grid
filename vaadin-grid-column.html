@@ -54,7 +54,17 @@ The `class` attribute is used to differentiate header and footer templates from 
       headerTemplate: {
         type: Object,
         value: function() {
-          return this._findTemplate('template.header') || null;
+          var template = this._findTemplate('template.header') || null;
+
+          if (template) {
+            var templatizer = new vaadin.elements.grid.Templatizer();
+            templatizer.dataHost = this.dataHost;
+            templatizer._instanceProps = {};
+            templatizer.template = template;
+            template.templatizer = templatizer;
+          }
+
+          return template;
         }
       },
 
@@ -64,7 +74,17 @@ The `class` attribute is used to differentiate header and footer templates from 
       footerTemplate: {
         type: Object,
         value: function() {
-          return this._findTemplate('template.footer') || null;
+          var template = this._findTemplate('template.footer') || null;
+
+          if (template) {
+            var templatizer = new vaadin.elements.grid.Templatizer();
+            templatizer.dataHost = this.dataHost;
+            templatizer._instanceProps = {};
+            templatizer.template = template;
+            template.templatizer = templatizer;
+          }
+
+          return template;
         }
       },
 
@@ -104,7 +124,7 @@ The `class` attribute is used to differentiate header and footer templates from 
     ],
 
     _selectFirstTemplate: function(selector) {
-      return Polymer.dom(this).querySelectorAll(selector).filter(function(el) {
+      return Array.prototype.filter.call(Polymer.dom(this).querySelectorAll(selector), function(el) {
         return el.parentElement === this;
       }.bind(this))[0];
     },
@@ -121,21 +141,21 @@ The `class` attribute is used to differentiate header and footer templates from 
     },
 
     _headerTemplateChanged: function(headerTemplate) {
-      if (headerTemplate) {
-        var templatizer = new vaadin.elements.grid.Templatizer(this.dataHost);
-        templatizer._instanceProps = {};
-        templatizer.template = headerTemplate;
-      }
+      // if (headerTemplate) {
+      //   var templatizer = new vaadin.elements.grid.Templatizer(this.dataHost);
+      //   templatizer._instanceProps = {};
+      //   templatizer.template = headerTemplate;
+      // }
 
       this.fire('property-changed', {path: 'headerTemplate', value: headerTemplate});
     },
 
     _footerTemplateChanged: function(footerTemplate) {
-      if (footerTemplate) {
-        var templatizer = new vaadin.elements.grid.Templatizer(this.dataHost);
-        templatizer._instanceProps = {};
-        templatizer.template = footerTemplate;
-      }
+      // if (footerTemplate) {
+      //   var templatizer = new vaadin.elements.grid.Templatizer(this.dataHost);
+      //   templatizer._instanceProps = {};
+      //   templatizer.template = footerTemplate;
+      // }
 
       this.fire('property-changed', {path: 'footerTemplate', value: footerTemplate});
     },
@@ -180,7 +200,16 @@ The `class` attribute is used to differentiate header and footer templates from 
       template: {
         type: Object,
         value: function() {
-          return this._findTemplate('template:not(.header):not(.footer)');
+          var template = this._findTemplate('template:not(.header):not(.footer)');
+
+          if (template) {
+            var templatizer = new vaadin.elements.grid.Templatizer();
+            templatizer.dataHost = this.datahost;
+            templatizer.template = template;
+            template.templatizer = templatizer;
+          }
+
+          return template;
         }
       },
 
@@ -211,13 +240,15 @@ The `class` attribute is used to differentiate header and footer templates from 
     },
 
     _templateChanged: function(template) {
-      var templatizer = new vaadin.elements.grid.Templatizer(this.dataHost);
+      // var templatizer = new vaadin.elements.grid.Templatizer();
+      // templatizer.dataHost = this.datahost;
+      // template.templatizer = templatizer;
 
       // body cell templatizer needs to be attached so that `item-changed` and
       // `template-instance-changed` events propagate to grid.
-      Polymer.dom(this.root).appendChild(templatizer);
+      Polymer.dom(this.root).appendChild(template.templatizer);
 
-      templatizer.template = template;
+      // templatizer.template = template;
 
       // We bubble false for optimisation
       this.fire('property-changed', {path: 'template', value: template}, {bubbles: false});

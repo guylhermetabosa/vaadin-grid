@@ -74,7 +74,7 @@
         '_childColumnsChanged(_childColumns)'
       ],
 
-      created: function() {
+      ready: function() {
         this.classList.add('vaadin-grid-cell');
       },
 
@@ -138,6 +138,8 @@
         }
 
         instance.index = index;
+        // instance.notifyPath('index', index);
+        // instance._flushProperties();
       },
 
       _itemChanged: function(item, instance) {
@@ -475,6 +477,10 @@
       },
 
       _headerTemplateChanged: function(headerTemplate, isAttached) {
+        if (isAttached === undefined) {
+          return;
+        }
+
         if (headerTemplate !== null && (this._isColumnRow || this.column.localName === 'vaadin-grid-column-group')) {
           this._isEmpty = false;
           this.instance = this.instance || headerTemplate.templatizer.createInstance();

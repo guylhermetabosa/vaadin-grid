@@ -420,24 +420,24 @@
     },
 
     _rowDetailsTemplateChanged: function(rowDetailsTemplate, physicalItems, count) {
-      if (rowDetailsTemplate === undefined || physicalItems === undefined || count === undefined) {
+      if (rowDetailsTemplate === undefined || !physicalItems || count === undefined) {
         return;
       }
 
-      physicalItems.forEach(function(row) {
+      Array.prototype.forEach.call(physicalItems, function(row) {
         row.rowDetailsTemplate = rowDetailsTemplate;
       });
     },
 
     _columnTreeChanged: function(columnTree, physicalItems, count) {
-      if (columnTree === undefined || physicalItems === undefined || count === undefined) {
+      if (columnTree === undefined || !physicalItems || count === undefined) {
         return;
       }
 
       this._frozenCellsChanged();
       this._hasTemplatesChanged(columnTree);
 
-      physicalItems.forEach(function(row) {
+      Array.prototype.forEach.call(physicalItems, function(row) {
         row.columns = columnTree[columnTree.length - 1];
       });
 
@@ -446,7 +446,7 @@
     },
 
     _updateLastColumn: function() {
-      Polymer.dom(this.$.table).querySelectorAll('.vaadin-grid-row').forEach(function(row) {
+      Array.prototype.forEach.call(Polymer.dom(this.$.table).querySelectorAll('.vaadin-grid-row'), function(row) {
         row.updateLastColumn();
       });
     },
