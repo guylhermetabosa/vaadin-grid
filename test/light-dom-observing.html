@@ -405,7 +405,7 @@
             flush(function() {
               // Once for the column and in effect of that, once for the added cell content elements
               var expectedCallCount = 2;
-              if (Polymer.Settings.useNativeShadow) {
+              if (Polymer.Settings.useNativeShadow || Polymer.Settings.useShadow) {
                 // Focus traps are relocated
                 expectedCallCount++;
               }

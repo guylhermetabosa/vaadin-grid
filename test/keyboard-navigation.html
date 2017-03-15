@@ -315,19 +315,20 @@
         describe('navigating with tab', function() {
           beforeEach(function() {
             scroller.navigating = true;
+            grid._observer.flush();
           });
 
           it('should have a focus trap as the very first child', function() {
             // header focus trap needs to be the first element
-            var trap = Polymer.dom(Polymer.Settings.useNativeShadow ? grid : scroller.root).querySelector(':not(style)');
+            var trap = Polymer.dom((Polymer.Settings.useNativeShadow || Polymer.Settings.useShadow) ? grid : scroller.root).querySelector(':not(style)');
 
             expect(trap.children[0].tabIndex).to.eql(0);
           });
 
           it('should have a focus trap as the very last child', function() {
             // footer focus trap needs to be the last element
-            var trap = Polymer.Settings.useNativeShadow ? grid.lastElementChild : scroller.lastElementChild;
-
+            var trap = (Polymer.Settings.useNativeShadow || Polymer.Settings.useShadow) ? grid.lastElementChild : scroller.lastElementChild;
+            console.log(trap)
             expect(trap.children[0].tabIndex).to.eql(0);
           });
 

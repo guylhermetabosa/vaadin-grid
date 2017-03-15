@@ -27,7 +27,7 @@
   vaadin.elements.grid.KeyboardNavigationBehaviorImpl = {
     hostAttributes: {
       // keys can be listened only when vaadin-grid is focusable
-      'tabindex': -1,
+      'tabindex': 0,
       'role': 'application'
     },
 
@@ -496,7 +496,7 @@
       e.preventDefault();
 
       var focusedCell = this._virtualFocus._focusedCell;
-      var firstElementChild = focusedCell.getContentChildren('content')[0].firstElementChild;
+      var firstElementChild = focusedCell.getContentChildren(Polymer.Element ? 'slot' : 'content')[0].firstElementChild;
       if (firstElementChild) {
         firstElementChild.click();
       } else if (this.navigating) {

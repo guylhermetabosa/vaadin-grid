@@ -46,7 +46,7 @@
 
         // In native shadow, focus traps need to be inside the same scope as
         // the "labelled by" elements
-        if (Polymer.Settings.useNativeShadow) {
+        if (Polymer.Settings.useNativeShadow || Polymer.Settings.useShadow) {
           Polymer.dom(this).appendChild(this._primary);
           Polymer.dom(this).appendChild(this._secondary);
         }
