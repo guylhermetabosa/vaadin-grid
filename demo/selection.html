@@ -185,16 +185,18 @@
         <dataprovider-select-all></dataprovider-select-all>
         <dom-module id="dataprovider-select-all">
           <template>
-            <style is="custom-style">
-              #grid[inverted] {
-                --vaadin-grid-body-cell: {
-                  background-color: var(--paper-grey-100);
-                };
-                --vaadin-grid-body-row-selected-cell: {
-                  background-color: var(--primary-background-color);
-                };
-              }
-            </style>
+            <custom-style>
+              <style is="custom-style">
+                #grid[inverted] {
+                  --vaadin-grid-body-cell: {
+                    background-color: var(--paper-grey-100);
+                  };
+                  --vaadin-grid-body-row-selected-cell: {
+                    background-color: var(--primary-background-color);
+                  };
+                }
+              </style>
+            </custom-style>
             <x-data-provider data-provider="{{dataProvider}}"></x-data-provider>
 
             <vaadin-grid  aria-label="Select All with Data Example" id="grid" data-provider="[[dataProvider]]" inverted$="[[inverted]]" size="200">
