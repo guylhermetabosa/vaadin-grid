@@ -15,15 +15,17 @@
 </head>
 
 <body>
-  <style is="custom-style">
-    vaadin-grid {
-      height: 500px;
-      --vaadin-grid-body-cell: {
-        padding: 0;
-        height: 50px;
+  <custom-style>
+    <style is="custom-style">
+      vaadin-grid {
+        height: 500px;
+        --vaadin-grid-body-cell: {
+          padding: 0;
+          height: 50px;
+        }
       }
-    }
-  </style>
+    </style>
+  </custom-style>
   <test-fixture id="default">
     <template>
       <vaadin-grid>
@@ -829,6 +831,7 @@
             clickItem(0);
 
             ctrlEnd();
+            grid.$.scroller.flushDebouncer('vaadin-grid-scrolling');
 
             expect(scroller._virtualFocus._focusedRow).to.eql(body.children[body.children.length - 1]);
           });
