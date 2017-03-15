@@ -275,7 +275,7 @@
     <!--<content select="vaadin-grid-column, vaadin-grid-selection-column, vaadin-grid-column-group"></content>-->
 
     <div id="spinner"></div>
-    <vaadin-grid-table-table id="table" overflow-hidden$="[[_hideTableOverflow(scrollbarWidth, safari)]]">
+    <vaadin-grid-table-table id="table" tabindex="-1" overflow-hidden$="[[_hideTableOverflow(scrollbarWidth, safari)]]">
       <vaadin-grid-sizer id="fixedsizer" top="[[_estScrollHeight]]" column-tree="[[columnTree]]"></vaadin-grid-sizer>
       <vaadin-grid-table-header id="header" target="[[target]]" column-tree="[[columnTree]]"></vaadin-grid-table-header>
       <vaadin-grid-table-body id="items"></vaadin-grid-table-body>
